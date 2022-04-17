@@ -1,11 +1,11 @@
 ﻿namespace HttpServer.Server
 {
-    using HttpServer.Server.Http;
     using System;
     using System.Net;
     using System.Net.Sockets;
     using System.Text;
     using System.Threading.Tasks;
+    using HttpServer.Server.Routing;
 
     public class MyServer
     {
@@ -13,11 +13,21 @@
         private readonly int port;
         private readonly TcpListener listener;
 
-        public MyServer(string ipAddress, int port)
+        public MyServer(string ipAddress, int port, Action<IRoutingTable> routingTable)
         {
             this.ipAddress = IPAddress.Parse(ipAddress);
             this.port = port;
             this.listener = new TcpListener(this.ipAddress, this.port);
+        }
+
+        public MyServer(int port, Action<IRoutingTable> routingTable)
+            : this("127.0.0.1", port, routingTable)
+        {
+        }
+
+        public MyServer(Action<IRoutingTable> routingTable)
+            : this(5000, routingTable)
+        {
         }
 
         public async Task Start()
@@ -87,7 +97,7 @@
 
             var response = $@"HTTP/1.1 200 OK
 Server: Http Server
-Date: {DateTime.UtcNow.ToString("r")}
+Date: {DateTime.UtcNow:r}
 Content-Length: {contentLength}
 Content-Type: text/html; charset=UTF-8
 
