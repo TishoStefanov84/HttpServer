@@ -47,7 +47,7 @@
                 "POST" => HttpMethod.Post,
                 "PUT" => HttpMethod.Put,
                 "DELETE" => HttpMethod.Delete,
-                _ => throw new System.InvalidOperationException($"Method {method} is not supported."),
+                _ => throw new InvalidOperationException($"Method {method} is not supported."),
             };
 
         }
