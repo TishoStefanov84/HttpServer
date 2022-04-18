@@ -12,5 +12,8 @@
 
         public HttpResponse Index()
             => Text("Hello from me!");
+
+        public HttpResponse ToSoftUni()
+            => Redirect("https://softuni.bg");
     }
 }
