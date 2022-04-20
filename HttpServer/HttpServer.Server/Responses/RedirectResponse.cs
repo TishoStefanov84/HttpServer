@@ -7,6 +7,6 @@ namespace HttpServer.Server.Responses
     {
         public RedirectResponse(string locatin) 
             : base(HttpStatusCode.Found)
-            => this.Headers.Add("Location", locatin);
+            => this.Headers.Add(HttpHeader.Location, new HttpHeader(HttpHeader.Location, locatin));
     }
 }
