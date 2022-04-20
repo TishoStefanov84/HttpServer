@@ -7,11 +7,11 @@
     {
         private const char PathSeparator = '/';
 
-        public ViewResponse(string viewPath, string controllerName) 
+        public ViewResponse(string viewPath, string controllerName, object model) 
             : base(HttpStatusCode.OK)
-            => this.GetHtml(viewPath, controllerName);    
+            => this.GetHtml(viewPath, controllerName, model);    
 
-        private void GetHtml(string viewName, string controllerName)
+        private void GetHtml(string viewName, string controllerName, object model)
         {
 
             if (!viewName.Contains(PathSeparator))
