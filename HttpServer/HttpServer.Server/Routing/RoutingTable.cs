@@ -3,7 +3,6 @@
     using System;
     using HttpServer.Server.Common;
     using HttpServer.Server.Http;
-    using HttpServer.Server.Responses;
     using System.Collections.Generic;
 
     public class RoutingTable : IRoutingTable
@@ -69,7 +68,7 @@
             if (!this.routes.ContainsKey(requestMethod)
                 || !this.routes[requestMethod].ContainsKey(requestPath))
             {
-                return new NotFoundResponse();
+                return new HttpResponse(HttpStatusCode.NotFound);
             }
 
             var responseFunction = this.routes[requestMethod][requestPath];

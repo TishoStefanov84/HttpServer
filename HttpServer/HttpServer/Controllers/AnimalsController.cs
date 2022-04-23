@@ -37,8 +37,15 @@
             return View(viewModel);
         }
 
-        public HttpResponse Dogs() => View();
+        public HttpResponse Dogs() => View(new DogViewModel
+        {
+            Name = "Rex",
+            Age = 3,
+            Breed = "Breed"
+        });
+
         public HttpResponse Bunnies() => View("Rabbits");
+
         public HttpResponse Turtles() => View("Animals/Wild/Turtles");
     }
 }
