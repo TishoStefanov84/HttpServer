@@ -2,6 +2,7 @@
 {
     using HttpServer.Server.Controllers;
     using HttpServer.Server.Http;
+    using System;
 
     public class AccountController : Controller
     {
@@ -25,6 +26,22 @@
             this.Response.AddCookie("My-Second-Cookie", "My-Second-Value");
 
             return Text("Cookie set!");
+        }
+
+        public HttpResponse ActionWithSession()
+        {
+            const string currentDateKey = "CurrentDate";
+
+            if (this.Request.Session.ContainsKey(currentDateKey))
+            {
+                var currentDate = this.Request.Session[currentDateKey];
+
+                return Text($"Stored date: {currentDate}!");
+            }
+
+            this.Request.Session[currentDateKey] = DateTime.UtcNow.ToString();
+
+            return Text("Current date stored!");
         }
     }
 }

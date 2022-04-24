@@ -2,6 +2,7 @@
 {
     using HttpServer.Server.Controllers;
     using HttpServer.Server.Http;
+    using System;
 
     public class HomeController : Controller
     {
@@ -18,5 +19,8 @@
 
         public HttpResponse ToSoftUni()
             => Redirect("https://softuni.bg");
+
+        public HttpResponse Error()
+            => throw new InvalidOperationException("Invalid action!");
     }
 }
